@@ -3,15 +3,30 @@ import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
 import PatientInfo from '@/components/PatientInfo';
 import GeneralInfo from '@/components/GeneralInfo';
 import LabTests from '@/components/LabTests';
 import AppointmentCalendar from '@/components/AppointmentCalendar';
+import InterventionWife from '@/components/InterventionWife';
+import InterventionHusband from '@/components/InterventionHusband';
+import PostIntervention from '@/components/PostIntervention';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
   const { toast } = useToast();
   const [activeSubTab, setActiveSubTab] = useState('wife');
+  const [activeInterventionTab, setActiveInterventionTab] = useState('wife');
+  const [wifeDiagnosis, setWifeDiagnosis] = useState('');
+  const [husbandDiagnosis, setHusbandDiagnosis] = useState('');
+  const [generalDiagnosis, setGeneralDiagnosis] = useState('');
+  const [treatmentMethods, setTreatmentMethods] = useState({
+    iui: false,
+    ivf: false,
+    other: false
+  });
 
   // Mock patient data
   const patientData = {
@@ -38,7 +53,6 @@ const Index = () => {
     { id: 'fsh', name: 'Xét nghiệm nội tiết FSH', checked: false },
   ];
 
-  // Lab tests data for husband
   const husbandLabTests = [
     { id: 'semen', name: 'Xét nghiệm tinh dịch đồ', checked: false },
     { id: 'hormone', name: 'Xét nghiệm nội tiết tố', checked: false },
@@ -52,6 +66,13 @@ const Index = () => {
       title: "Đã lưu hồ sơ thành công",
       description: `Hồ sơ bệnh nhân ${patientData.name} đã được cập nhật.`,
     });
+  };
+
+  const handleTreatmentMethodChange = (method: string, checked: boolean) => {
+    setTreatmentMethods(prev => ({
+      ...prev,
+      [method]: checked
+    }));
   };
 
   const renderSpecialtySubTabs = () => (
@@ -81,11 +102,159 @@ const Index = () => {
         <TabsContent value="wife" className="space-y-6">
           <GeneralInfo title="Vợ" includeVaccines={true} />
           <LabTests title="Vợ" tests={wifeLabTests} />
+          
+          {/* Chẩn đoán Vợ */}
+          <Card className="p-6 bg-white border border-[color:var(--card-border)]">
+            <h3 className="text-lg font-semibold mb-4 text-[color:var(--text-accent)]">
+              Chẩn đoán
+            </h3>
+            <div className="space-y-2">
+              <Label htmlFor="wifeDiagnosis" className="text-sm font-medium text-[color:var(--text-secondary)]">
+                Chẩn đoán chi tiết
+              </Label>
+              <Textarea
+                id="wifeDiagnosis"
+                value={wifeDiagnosis}
+                onChange={(e) => setWifeDiagnosis(e.target.value)}
+                placeholder="Nhập chẩn đoán cho vợ..."
+                className="min-h-[100px] border-[color:var(--card-border)] focus:border-[color:var(--deep-taupe)]"
+              />
+            </div>
+          </Card>
         </TabsContent>
 
         <TabsContent value="husband" className="space-y-6">
           <GeneralInfo title="Chồng" includeVaccines={false} />
           <LabTests title="Chồng" tests={husbandLabTests} />
+          
+          {/* Chẩn đoán Chồng */}
+          <Card className="p-6 bg-white border border-[color:var(--card-border)]">
+            <h3 className="text-lg font-semibold mb-4 text-[color:var(--text-accent)]">
+              Chẩn đoán
+            </h3>
+            <div className="space-y-2">
+              <Label htmlFor="husbandDiagnosis" className="text-sm font-medium text-[color:var(--text-secondary)]">
+                Chẩn đoán chi tiết
+              </Label>
+              <Textarea
+                id="husbandDiagnosis"
+                value={husbandDiagnosis}
+                onChange={(e) => setHusbandDiagnosis(e.target.value)}
+                placeholder="Nhập chẩn đoán cho chồng..."
+                className="min-h-[100px] border-[color:var(--card-border)] focus:border-[color:var(--deep-taupe)]"
+              />
+            </div>
+          </Card>
+
+          {/* Chẩn đoán chung - Đề xuất từ bác sĩ */}
+          <Card className="p-6 bg-white border border-[color:var(--card-border)]">
+            <h3 className="text-lg font-semibold mb-4 text-[color:var(--text-accent)]">
+              Chẩn đoán chung - Đề xuất từ bác sĩ
+            </h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="generalDiagnosis" className="text-sm font-medium text-[color:var(--text-secondary)]">
+                  Đề xuất điều trị
+                </Label>
+                <Textarea
+                  id="generalDiagnosis"
+                  value={generalDiagnosis}
+                  onChange={(e) => setGeneralDiagnosis(e.target.value)}
+                  placeholder="Nhập đề xuất điều trị từ bác sĩ..."
+                  className="min-h-[100px] border-[color:var(--card-border)] focus:border-[color:var(--deep-taupe)]"
+                />
+              </div>
+              
+              <div className="space-y-3">
+                <Label className="text-sm font-medium text-[color:var(--text-secondary)]">
+                  Phương pháp điều trị được đề xuất:
+                </Label>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <Checkbox
+                      id="iui"
+                      checked={treatmentMethods.iui}
+                      onCheckedChange={(checked) => handleTreatmentMethodChange('iui', !!checked)}
+                      className="data-[state=checked]:bg-[color:var(--deep-taupe)] data-[state=checked]:border-[color:var(--deep-taupe)]"
+                    />
+                    <label htmlFor="iui" className="text-sm font-medium">
+                      IUI (Thụ tinh nhân tạo trong tử cung)
+                    </label>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Checkbox
+                      id="ivf"
+                      checked={treatmentMethods.ivf}
+                      onCheckedChange={(checked) => handleTreatmentMethodChange('ivf', !!checked)}
+                      className="data-[state=checked]:bg-[color:var(--deep-taupe)] data-[state=checked]:border-[color:var(--deep-taupe)]"
+                    />
+                    <label htmlFor="ivf" className="text-sm font-medium">
+                      IVF (Thụ tinh ống nghiệm)
+                    </label>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Checkbox
+                      id="other"
+                      checked={treatmentMethods.other}
+                      onCheckedChange={(checked) => handleTreatmentMethodChange('other', !!checked)}
+                      className="data-[state=checked]:bg-[color:var(--deep-taupe)] data-[state=checked]:border-[color:var(--deep-taupe)]"
+                    />
+                    <label htmlFor="other" className="text-sm font-medium">
+                      Khác
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="appointment">
+          <AppointmentCalendar />
+        </TabsContent>
+      </Tabs>
+
+      <div className="flex justify-end pt-6">
+        <Button
+          onClick={handleSaveRecord}
+          className="bg-[color:var(--button-primary-bg)] hover:bg-[color:var(--button-hover-bg)] text-[color:var(--button-primary-text)] px-8 py-2"
+        >
+          Lưu hồ sơ
+        </Button>
+      </div>
+    </div>
+  );
+
+  const renderInterventionSubTabs = () => (
+    <div className="space-y-6">
+      <Tabs value={activeInterventionTab} onValueChange={setActiveInterventionTab}>
+        <TabsList className="grid w-full grid-cols-3 bg-[color:var(--secondary-background)]">
+          <TabsTrigger 
+            value="wife"
+            className="data-[state=active]:bg-[color:var(--deep-taupe)] data-[state=active]:text-white"
+          >
+            Vợ
+          </TabsTrigger>
+          <TabsTrigger 
+            value="husband"
+            className="data-[state=active]:bg-[color:var(--deep-taupe)] data-[state=active]:text-white"
+          >
+            Chồng
+          </TabsTrigger>
+          <TabsTrigger 
+            value="appointment"
+            className="data-[state=active]:bg-[color:var(--deep-taupe)] data-[state=active]:text-white"
+          >
+            Hẹn tái khám
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="wife">
+          <InterventionWife />
+        </TabsContent>
+
+        <TabsContent value="husband">
+          <InterventionHusband />
         </TabsContent>
 
         <TabsContent value="appointment">
@@ -138,25 +307,11 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="intervention">
-            <Card className="p-8 bg-white border border-[color:var(--card-border)] text-center">
-              <h3 className="text-xl font-semibold text-[color:var(--text-accent)] mb-4">
-                Can thiệp
-              </h3>
-              <p className="text-[color:var(--text-secondary)]">
-                Nội dung tab Can thiệp sẽ được phát triển trong phiên bản tiếp theo.
-              </p>
-            </Card>
+            {renderInterventionSubTabs()}
           </TabsContent>
 
           <TabsContent value="post-intervention">
-            <Card className="p-8 bg-white border border-[color:var(--card-border)] text-center">
-              <h3 className="text-xl font-semibold text-[color:var(--text-accent)] mb-4">
-                Hậu can thiệp
-              </h3>
-              <p className="text-[color:var(--text-secondary)]">
-                Nội dung tab Hậu can thiệp sẽ được phát triển trong phiên bản tiếp theo.
-              </p>
-            </Card>
+            <PostIntervention />
           </TabsContent>
         </Tabs>
       </div>
