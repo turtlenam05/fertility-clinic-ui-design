@@ -1,101 +1,121 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
+    /* Font */
+    --font-family: 'Montserrat', sans-serif;
+    --font-size-base: 16px;
+    --font-size-sm: 14px;
+    --font-size-lg: 20px;
+    --font-size-xl: 28px;
+    --font-size-xxl: 36px;
+
+    /* Màu nền chính */
+    --primary-background: #f9f6f6; /* Off-white/cream */
+    --secondary-background: #e6dfdc; /* Light beige */
+    --light-background: #ffffff; /* White, bổ sung cho card hoặc section */
+
+    /* Màu accent và điểm nhấn */
+    --accent-color: #9e8e7b; /* Soft taupe */
+    --deep-taupe: #61474C; /* Deep taupe, màu mới làm điểm nhấn chính */
+    --dark-accent: #4a3639; /* Tông đậm hơn của deep taupe, bổ sung cho hover */
+
+    /* Màu text */
+    --text-primary: #333333; /* Black/dark gray */
+    --text-secondary: #4A2C2A ; /* Medium gray */
+    --text-accent: #61474C; /* Deep taupe cho text nổi bật */
+
+    /* Màu button */
+    --button-primary-bg: #61474C; /* Deep taupe thay cho black để đồng bộ */
+    --button-primary-text: #fbf9f6; /* Off-white cho contrast */
+    --button-secondary-bg: transparent;
+    --button-secondary-text: #9e8e7b; /* Soft taupe */
+    --button-secondary-border: #bdbdbd; /* Light gray */
+    --button-hover-bg: #4a3639; /* Darker taupe cho hover */
+
+    /* Màu hover và shadow */
+    --hover-accent: rgba(97, 71, 76, 0.2); /* Deep taupe với opacity */
+    --shadow-accent: rgba(97, 71, 76, 0.25); /* Deep taupe shadow, tăng độ đậm */
+    --shadow-dark-gray: rgba(51, 51, 51, 0.15); /* Shadow tối, đổi tên cho rõ */
+
+    /* Gradient */
+    --gradient-circle: radial-gradient(
+      50% 50% at 50% 50%,
+      #e1d7d1 0%,
+      rgba(237, 231, 227, 0) 100%
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      #61474C 0%,
+      #9e8e7b 100%
+    ); /* Gradient mới dùng deep taupe và soft taupe */
+
+    /* Màu trạng thái */
+    --success-green: #4caf50; /* Green */
+    --warning-red: #f44336; /* Red */
+    --info-blue: #2196f3; /* Blue */
+    --warning-orange: #ff9800; /* Orange */
+
+    /* Màu border và card */
+    --card-border: rgba(158, 142, 123, 0.2); /* Soft taupe */
+    --card-hover-border: rgba(97, 71, 76, 0.4); /* Deep taupe */
+    --card-background: #ffffff; /* White cho card */
+    --card-gradient: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      var(--secondary-background) 100%
+    );
+    --card-hover-gradient: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      #ddd4d0 100%
+    );
+
+    /* Khoảng cách */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+
+    /* Breakpoints cho responsive */
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[color:var(--primary-background)] text-[color:var(--text-primary)];
+    font-family: var(--font-family);
   }
 }
