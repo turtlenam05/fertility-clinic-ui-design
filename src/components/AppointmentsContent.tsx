@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calendar, Filter, Clock, User } from 'lucide-react';
+import { Calendar, Filter, Clock, User, FileText } from 'lucide-react';
 
 interface AppointmentsContentProps {
   onPatientSelect?: (patientId: string) => void;
@@ -13,6 +12,7 @@ interface AppointmentsContentProps {
 export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPatientSelect }) => {
   const [viewType, setViewType] = useState<'day' | 'week' | 'month'>('day');
   const [statusFilter, setStatusFilter] = useState<'all' | 'confirmed' | 'pending' | 'completed'>('all');
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   const appointments = [
     {
@@ -82,29 +82,28 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 theme-gradient-bg min-h-screen p-6">
       {/* Header */}
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Lịch hẹn</h1>
-          <p className="text-gray-600 mt-2">Quản lý lịch hẹn của bệnh nhân</p>
+          <h1 className="text-3xl font-bold" style={{ color: '#853655' }}>Lịch hẹn</h1>
+          <p className="text-gray-600 mt-2">Quản lý lịch hẹn và cuộc hẹn</p>
         </div>
-        <div className="flex space-x-3">
-          <Button>
-            <Calendar className="mr-2 h-4 w-4" />
-            Thêm lịch hẹn
-          </Button>
-        </div>
+        <Button className="theme-primary-bg hover:bg-[#6B2A43]">
+          <Calendar className="mr-2 h-4 w-4" />
+          Thêm lịch hẹn mới
+        </Button>
       </div>
 
-      {/* Filters */}
-      <Card>
+      {/* Filters and View Controls */}
+      <Card className="theme-card">
         <CardContent className="pt-6">
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 items-center">
             <div className="flex items-center space-x-2">
-              <span className="text-sm font-medium">Xem theo:</span>
-              <Select value={viewType} onValueChange={(value: 'day' | 'week' | 'month') => setViewType(value)}>
-                <SelectTrigger className="w-32">
+              <Filter className="h-4 w-4" style={{ color: '#853655' }} />
+              <span className="text-sm font-medium" style={{ color: '#853655' }}>Xem theo:</span>
+              <Select value={viewType} onValueChange={(value: any) => setViewType(value)}>
+                <SelectTrigger className="w-32 border-[#E8B9BB] focus:ring-[#853655]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -116,30 +115,36 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
             </div>
 
             <div className="flex items-center space-x-2">
-              <Filter className="h-4 w-4" />
-              <span className="text-sm font-medium">Trạng thái:</span>
+              <span className="text-sm font-medium" style={{ color: '#853655' }}>Trạng thái:</span>
               <Select value={statusFilter} onValueChange={(value: any) => setStatusFilter(value)}>
-                <SelectTrigger className="w-40">
+                <SelectTrigger className="w-40 border-[#E8B9BB] focus:ring-[#853655]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">Tất cả</SelectItem>
-                  <SelectItem value="pending">Chưa xác nhận</SelectItem>
                   <SelectItem value="confirmed">Đã xác nhận</SelectItem>
+                  <SelectItem value="pending">Chưa xác nhận</SelectItem>
                   <SelectItem value="completed">Đã khám xong</SelectItem>
                 </SelectContent>
               </Select>
             </div>
+
+            <Button 
+              variant="outline" 
+              onClick={() => setSelectedDate(new Date().toISOString().split('T')[0])}
+              className="border-[#E8B9BB] text-[#853655] hover:bg-[#E8B9BB]"
+            >
+              Hôm nay
+            </Button>
           </div>
         </CardContent>
       </Card>
 
-      {/* Appointments List */}
-      <Card>
+      {/* Calendar View */}
+      <Card className="theme-card">
         <CardHeader>
-          <CardTitle className="flex items-center">
-            <Calendar className="mr-2 h-5 w-5" />
-            Danh sách lịch hẹn - {viewType === 'day' ? 'Hôm nay' : viewType === 'week' ? 'Tuần này' : 'Tháng này'}
+          <CardTitle style={{ color: '#853655' }}>
+            Lịch hẹn - {viewType === 'day' ? 'Hôm nay' : viewType === 'week' ? 'Tuần này' : 'Tháng này'}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -147,44 +152,45 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
             {filteredAppointments.map((appointment) => (
               <div 
                 key={appointment.id} 
-                className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+                className="flex items-center justify-between p-4 rounded-lg border cursor-pointer transition-all hover:shadow-md theme-card"
                 onClick={() => handlePatientClick(appointment.patientId)}
               >
-                <div className="flex-1">
-                  <div className="flex items-center space-x-4 mb-2">
-                    <div className="flex items-center space-x-2">
-                      <Clock className="h-4 w-4 text-blue-600" />
-                      <span className="font-medium text-blue-600">{appointment.time}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <User className="h-4 w-4 text-gray-600" />
-                      <span className="font-medium">{appointment.patientName}</span>
-                    </div>
-                    <Badge 
-                      variant="outline" 
-                      className="text-xs cursor-pointer hover:bg-blue-50"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handlePatientClick(appointment.patientId);
-                      }}
-                    >
-                      {appointment.patientId}
-                    </Badge>
+                <div className="flex items-center space-x-4">
+                  <div className="text-center">
+                    <div className="text-lg font-semibold" style={{ color: '#853655' }}>{appointment.time}</div>
+                    <div className="text-xs text-gray-500">{appointment.date}</div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <span className="text-sm text-gray-600">{appointment.purpose}</span>
-                    {appointment.notes && (
-                      <span className="text-xs text-gray-500 italic">• {appointment.notes}</span>
-                    )}
+                  <div className="border-l pl-4" style={{ borderColor: '#E8B9BB' }}>
+                    <div className="font-medium">{appointment.patientName}</div>
+                    <div className="text-sm text-gray-600">{appointment.patientId}</div>
+                    <div className="text-sm" style={{ color: '#853655' }}>{appointment.purpose}</div>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2">
                   {getStatusBadge(appointment.status)}
-                  <Button size="sm" variant="outline">Chi tiết</Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-[#E8B9BB] text-[#853655] hover:bg-[#E8B9BB]"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handlePatientClick(appointment.patientId);
+                    }}
+                  >
+                    <FileText className="h-4 w-4 mr-1" />
+                    Xem hồ sơ
+                  </Button>
                 </div>
               </div>
             ))}
           </div>
+
+          {filteredAppointments.length === 0 && (
+            <div className="text-center py-8">
+              <Calendar className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+              <p className="text-gray-500">Không có lịch hẹn nào phù hợp với bộ lọc.</p>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

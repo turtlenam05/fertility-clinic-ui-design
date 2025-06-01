@@ -30,9 +30,9 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full">
+      <div className="min-h-screen flex w-full theme-gradient-bg">
         <DoctorSidebar activeTab={activeTab} onTabChange={onTabChange} />
-        <main className="flex-1 p-6 bg-gray-50">
+        <main className="flex-1">
           {renderContent()}
         </main>
       </div>

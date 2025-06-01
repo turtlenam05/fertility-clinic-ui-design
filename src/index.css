@@ -13,101 +13,82 @@
     --font-size-xl: 28px;
     --font-size-xxl: 36px;
 
-    /* Màu nền chính */
-    --primary-background: #f9f6f6; /* Off-white/cream */
-    --secondary-background: #e6dfdc; /* Light beige */
-    --light-background: #ffffff; /* White, bổ sung cho card hoặc section */
+    /* Rose Fog and Camelot Theme */
+    --rose-fog: #E8B9BB;
+    --camelot: #853655;
+    --rose-fog-light: #F2D1D3;
+    --rose-fog-dark: #DCA5A7;
+    --camelot-light: #A04469;
+    --camelot-dark: #6B2A43;
 
-    /* Màu accent và điểm nhấn */
-    --accent-color: #9e8e7b; /* Soft taupe */
-    --deep-taupe: #61474C; /* Deep taupe, màu mới làm điểm nhấn chính */
-    --dark-accent: #4a3639; /* Tông đậm hơn của deep taupe, bổ sung cho hover */
+    /* Primary theme colors */
+    --primary-background: #fdf9f9; /* Very light rose tint */
+    --secondary-background: #f5eff0; /* Light rose background */
+    --light-background: #ffffff;
 
-    /* Màu text */
-    --text-primary: #333333; /* Black/dark gray */
-    --text-secondary: #4A2C2A ; /* Medium gray */
-    --text-accent: #61474C; /* Deep taupe cho text nổi bật */
+    /* Accent colors using the theme */
+    --accent-color: #E8B9BB; /* Rose Fog */
+    --deep-accent: #853655; /* Camelot */
+    --dark-accent: #6B2A43; /* Darker Camelot */
 
-    /* Màu button */
-    --button-primary-bg: #61474C; /* Deep taupe thay cho black để đồng bộ */
-    --button-primary-text: #fbf9f6; /* Off-white cho contrast */
-    --button-secondary-bg: transparent;
-    --button-secondary-text: #9e8e7b; /* Soft taupe */
-    --button-secondary-border: #bdbdbd; /* Light gray */
-    --button-hover-bg: #4a3639; /* Darker taupe cho hover */
+    /* Text colors */
+    --text-primary: #2d1b1f; /* Dark with camelot undertones */
+    --text-secondary: #853655; /* Camelot for secondary text */
+    --text-accent: #E8B9BB; /* Rose fog for accents */
 
-    /* Màu hover và shadow */
-    --hover-accent: rgba(97, 71, 76, 0.2); /* Deep taupe với opacity */
-    --shadow-accent: rgba(97, 71, 76, 0.25); /* Deep taupe shadow, tăng độ đậm */
-    --shadow-dark-gray: rgba(51, 51, 51, 0.15); /* Shadow tối, đổi tên cho rõ */
+    /* Button colors */
+    --button-primary-bg: #853655; /* Camelot */
+    --button-primary-text: #ffffff;
+    --button-secondary-bg: #E8B9BB; /* Rose Fog */
+    --button-secondary-text: #853655; /* Camelot */
+    --button-hover-bg: #6B2A43; /* Dark Camelot */
 
-    /* Gradient */
-    --gradient-circle: radial-gradient(
-      50% 50% at 50% 50%,
-      #e1d7d1 0%,
-      rgba(237, 231, 227, 0) 100%
-    );
-    --gradient-accent: linear-gradient(
-      135deg,
-      #61474C 0%,
-      #9e8e7b 100%
-    ); /* Gradient mới dùng deep taupe và soft taupe */
+    /* Status colors with theme integration */
+    --success-color: #4ade80;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+    --info-color: #3b82f6;
 
-    /* Màu trạng thái */
-    --success-green: #4caf50; /* Green */
-    --warning-red: #f44336; /* Red */
-    --info-blue: #2196f3; /* Blue */
-    --warning-orange: #ff9800; /* Orange */
+    /* Sidebar colors */
+    --sidebar-background: #853655; /* Camelot */
+    --sidebar-foreground: #ffffff;
+    --sidebar-accent: #E8B9BB; /* Rose Fog */
+    --sidebar-hover: #6B2A43; /* Dark Camelot */
 
-    /* Màu border và card */
-    --card-border: rgba(158, 142, 123, 0.2); /* Soft taupe */
-    --card-hover-border: rgba(97, 71, 76, 0.4); /* Deep taupe */
-    --card-background: #ffffff; /* White cho card */
-    --card-gradient: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.9) 0%,
-      var(--secondary-background) 100%
-    );
-    --card-hover-gradient: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.95) 0%,
-      #ddd4d0 100%
-    );
+    /* Card and border colors */
+    --card-background: #ffffff;
+    --card-border: rgba(232, 185, 187, 0.3); /* Rose Fog with opacity */
+    --card-hover-border: rgba(133, 54, 85, 0.5); /* Camelot with opacity */
 
-    /* Khoảng cách */
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 32px;
-    --spacing-xxl: 48px;
-
-    /* Breakpoints cho responsive */
-    --breakpoint-sm: 576px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 992px;
-    --breakpoint-xl: 1200px;
-
+    /* Standard shadcn variables with theme integration */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 342 24% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 342 24% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 342 24% 15%;
+    --primary: 342 42% 37%; /* Camelot */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 344 23% 82%; /* Rose Fog */
+    --secondary-foreground: 342 42% 37%;
+    --muted: 344 15% 95%;
+    --muted-foreground: 342 15% 45%;
+    --accent: 344 23% 82%; /* Rose Fog */
+    --accent-foreground: 342 42% 37%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 344 23% 88%;
+    --input: 344 23% 88%;
+    --ring: 342 42% 37%;
     --radius: 0.5rem;
+    --sidebar-background: 342 42% 37%; /* Camelot */
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 344 23% 82%; /* Rose Fog */
+    --sidebar-primary-foreground: 342 42% 37%;
+    --sidebar-accent: 344 30% 75%;
+    --sidebar-accent-foreground: 342 42% 37%;
+    --sidebar-border: 342 35% 45%;
+    --sidebar-ring: 344 23% 82%;
   }
 
   * {
@@ -117,5 +98,30 @@
   body {
     @apply bg-[color:var(--primary-background)] text-[color:var(--text-primary)];
     font-family: var(--font-family);
+  }
+
+  /* Custom theme classes */
+  .theme-gradient-bg {
+    background: linear-gradient(135deg, #fdf9f9 0%, #f5eff0 100%);
+  }
+
+  .theme-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fdf9f9 100%);
+    border: 1px solid rgba(232, 185, 187, 0.3);
+  }
+
+  .theme-card:hover {
+    border-color: rgba(133, 54, 85, 0.5);
+    box-shadow: 0 4px 12px rgba(133, 54, 85, 0.15);
+  }
+
+  .theme-accent-bg {
+    background-color: #E8B9BB;
+    color: #853655;
+  }
+
+  .theme-primary-bg {
+    background-color: #853655;
+    color: #ffffff;
   }
 }
