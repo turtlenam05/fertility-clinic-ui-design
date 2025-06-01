@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -15,7 +14,11 @@ import InterventionHusband from '@/components/InterventionHusband';
 import PostIntervention from '@/components/PostIntervention';
 import { useToast } from '@/hooks/use-toast';
 
-const Index = () => {
+interface IndexProps {
+  onBackToDashboard?: () => void;
+}
+
+const Index: React.FC<IndexProps> = ({ onBackToDashboard }) => {
   const { toast } = useToast();
   const [activeSubTab, setActiveSubTab] = useState('wife');
   const [activeInterventionTab, setActiveInterventionTab] = useState('wife');
@@ -274,12 +277,37 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[color:var(--primary-background)] p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Patient Information Header */}
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="container mx-auto px-4 py-8">
+        {onBackToDashboard && (
+          <div className="mb-6">
+            <Button 
+              variant="outline" 
+              onClick={onBackToDashboard}
+              className="mb-4"
+            >
+              ← Quay về Dashboard
+            </Button>
+          </div>
+        )}
+        
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl font-semibold text-[color:var(--text-accent)]">
+            Hồ sơ bệnh nhân
+          </h1>
+          <Button
+            onClick={handleSaveRecord}
+            className="bg-[color:var(--button-primary-bg)] hover:bg-[color:var(--button-hover-bg)] text-[color:var(--button-primary-text)] px-8 py-2"
+          >
+            Lưu hồ sơ
+          </Button>
+        </div>
+
+        {/* Patient Info */}
         <PatientInfo patient={patientData} />
 
-        {/* Main Tabs */}
+        {/* Tabs */}
         <Tabs defaultValue="specialty" className="w-full">
           <TabsList className="grid w-full grid-cols-3 bg-[color:var(--secondary-background)] mb-6">
             <TabsTrigger 

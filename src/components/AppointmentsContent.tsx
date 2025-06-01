@@ -1,0 +1,192 @@
+
+import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Calendar, Filter, Clock, User } from 'lucide-react';
+
+interface AppointmentsContentProps {
+  onPatientSelect?: (patientId: string) => void;
+}
+
+export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPatientSelect }) => {
+  const [viewType, setViewType] = useState<'day' | 'week' | 'month'>('day');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'confirmed' | 'pending' | 'completed'>('all');
+
+  const appointments = [
+    {
+      id: 1,
+      patientId: 'BN001',
+      patientName: 'Nguyễn Thị A',
+      date: '2024-01-16',
+      time: '08:30',
+      purpose: 'Khám tái khám',
+      status: 'confirmed',
+      notes: 'Kiểm tra kết quả xét nghiệm'
+    },
+    {
+      id: 2,
+      patientId: 'BN002',
+      patientName: 'Trần Văn B',
+      date: '2024-01-16',
+      time: '10:00',
+      purpose: 'Khám lần đầu',
+      status: 'pending',
+      notes: 'Tư vấn phương pháp điều trị'
+    },
+    {
+      id: 3,
+      patientId: 'BN003',
+      patientName: 'Lê Thị C',
+      date: '2024-01-16',
+      time: '14:30',
+      purpose: 'Chọc hút trứng',
+      status: 'confirmed',
+      notes: 'IVF - chu kỳ thứ 2'
+    },
+    {
+      id: 4,
+      patientId: 'BN004',
+      patientName: 'Phạm Thị D',
+      date: '2024-01-16',
+      time: '16:00',
+      purpose: 'Bơm tinh trùng',
+      status: 'completed',
+      notes: 'IUI - hoàn tất'
+    },
+  ];
+
+  const filteredAppointments = appointments.filter(appointment => {
+    if (statusFilter === 'all') return true;
+    return appointment.status === statusFilter;
+  });
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'confirmed':
+        return <Badge className="bg-green-100 text-green-800">Đã xác nhận</Badge>;
+      case 'pending':
+        return <Badge variant="secondary">Chưa xác nhận</Badge>;
+      case 'completed':
+        return <Badge className="bg-blue-100 text-blue-800">Đã khám xong</Badge>;
+      default:
+        return <Badge variant="outline">{status}</Badge>;
+    }
+  };
+
+  const handlePatientClick = (patientId: string) => {
+    if (onPatientSelect) {
+      onPatientSelect(patientId);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex justify-between items-start">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Lịch hẹn</h1>
+          <p className="text-gray-600 mt-2">Quản lý lịch hẹn của bệnh nhân</p>
+        </div>
+        <div className="flex space-x-3">
+          <Button>
+            <Calendar className="mr-2 h-4 w-4" />
+            Thêm lịch hẹn
+          </Button>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex flex-wrap gap-4">
+            <div className="flex items-center space-x-2">
+              <span className="text-sm font-medium">Xem theo:</span>
+              <Select value={viewType} onValueChange={(value: 'day' | 'week' | 'month') => setViewType(value)}>
+                <SelectTrigger className="w-32">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="day">Ngày</SelectItem>
+                  <SelectItem value="week">Tuần</SelectItem>
+                  <SelectItem value="month">Tháng</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Filter className="h-4 w-4" />
+              <span className="text-sm font-medium">Trạng thái:</span>
+              <Select value={statusFilter} onValueChange={(value: any) => setStatusFilter(value)}>
+                <SelectTrigger className="w-40">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Tất cả</SelectItem>
+                  <SelectItem value="pending">Chưa xác nhận</SelectItem>
+                  <SelectItem value="confirmed">Đã xác nhận</SelectItem>
+                  <SelectItem value="completed">Đã khám xong</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Appointments List */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center">
+            <Calendar className="mr-2 h-5 w-5" />
+            Danh sách lịch hẹn - {viewType === 'day' ? 'Hôm nay' : viewType === 'week' ? 'Tuần này' : 'Tháng này'}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {filteredAppointments.map((appointment) => (
+              <div 
+                key={appointment.id} 
+                className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+                onClick={() => handlePatientClick(appointment.patientId)}
+              >
+                <div className="flex-1">
+                  <div className="flex items-center space-x-4 mb-2">
+                    <div className="flex items-center space-x-2">
+                      <Clock className="h-4 w-4 text-blue-600" />
+                      <span className="font-medium text-blue-600">{appointment.time}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <User className="h-4 w-4 text-gray-600" />
+                      <span className="font-medium">{appointment.patientName}</span>
+                    </div>
+                    <Badge 
+                      variant="outline" 
+                      className="text-xs cursor-pointer hover:bg-blue-50"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handlePatientClick(appointment.patientId);
+                      }}
+                    >
+                      {appointment.patientId}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-sm text-gray-600">{appointment.purpose}</span>
+                    {appointment.notes && (
+                      <span className="text-xs text-gray-500 italic">• {appointment.notes}</span>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  {getStatusBadge(appointment.status)}
+                  <Button size="sm" variant="outline">Chi tiết</Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
