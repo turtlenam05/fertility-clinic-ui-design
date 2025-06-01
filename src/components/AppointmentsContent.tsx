@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -86,10 +87,10 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
       {/* Header */}
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold" style={{ color: '#853655' }}>Lịch hẹn</h1>
+          <h1 className="text-3xl font-bold" style={{ color: '#61474C' }}>Lịch hẹn</h1>
           <p className="text-gray-600 mt-2">Quản lý lịch hẹn và cuộc hẹn</p>
         </div>
-        <Button className="theme-primary-bg hover:bg-[#6B2A43]">
+        <Button className="theme-primary-bg hover:bg-[#4a3639]">
           <Calendar className="mr-2 h-4 w-4" />
           Thêm lịch hẹn mới
         </Button>
@@ -100,10 +101,10 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
         <CardContent className="pt-6">
           <div className="flex flex-wrap gap-4 items-center">
             <div className="flex items-center space-x-2">
-              <Filter className="h-4 w-4" style={{ color: '#853655' }} />
-              <span className="text-sm font-medium" style={{ color: '#853655' }}>Xem theo:</span>
+              <Filter className="h-4 w-4" style={{ color: '#61474C' }} />
+              <span className="text-sm font-medium" style={{ color: '#61474C' }}>Xem theo:</span>
               <Select value={viewType} onValueChange={(value: any) => setViewType(value)}>
-                <SelectTrigger className="w-32 border-[#E8B9BB] focus:ring-[#853655]">
+                <SelectTrigger className="w-32 border-[#9e8e7b] focus:ring-[#61474C]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -115,9 +116,9 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
             </div>
 
             <div className="flex items-center space-x-2">
-              <span className="text-sm font-medium" style={{ color: '#853655' }}>Trạng thái:</span>
+              <span className="text-sm font-medium" style={{ color: '#61474C' }}>Trạng thái:</span>
               <Select value={statusFilter} onValueChange={(value: any) => setStatusFilter(value)}>
-                <SelectTrigger className="w-40 border-[#E8B9BB] focus:ring-[#853655]">
+                <SelectTrigger className="w-40 border-[#9e8e7b] focus:ring-[#61474C]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -132,7 +133,7 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
             <Button 
               variant="outline" 
               onClick={() => setSelectedDate(new Date().toISOString().split('T')[0])}
-              className="border-[#E8B9BB] text-[#853655] hover:bg-[#E8B9BB]"
+              className="border-[#9e8e7b] text-[#61474C] hover:bg-[#9e8e7b]"
             >
               Hôm nay
             </Button>
@@ -143,7 +144,7 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
       {/* Calendar View */}
       <Card className="theme-card">
         <CardHeader>
-          <CardTitle style={{ color: '#853655' }}>
+          <CardTitle style={{ color: '#61474C' }}>
             Lịch hẹn - {viewType === 'day' ? 'Hôm nay' : viewType === 'week' ? 'Tuần này' : 'Tháng này'}
           </CardTitle>
         </CardHeader>
@@ -157,13 +158,13 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
               >
                 <div className="flex items-center space-x-4">
                   <div className="text-center">
-                    <div className="text-lg font-semibold" style={{ color: '#853655' }}>{appointment.time}</div>
+                    <div className="text-lg font-semibold" style={{ color: '#61474C' }}>{appointment.time}</div>
                     <div className="text-xs text-gray-500">{appointment.date}</div>
                   </div>
-                  <div className="border-l pl-4" style={{ borderColor: '#E8B9BB' }}>
+                  <div className="border-l pl-4" style={{ borderColor: '#9e8e7b' }}>
                     <div className="font-medium">{appointment.patientName}</div>
                     <div className="text-sm text-gray-600">{appointment.patientId}</div>
-                    <div className="text-sm" style={{ color: '#853655' }}>{appointment.purpose}</div>
+                    <div className="text-sm" style={{ color: '#61474C' }}>{appointment.purpose}</div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -171,7 +172,7 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="border-[#E8B9BB] text-[#853655] hover:bg-[#E8B9BB]"
+                    className="border-[#9e8e7b] text-[#61474C] hover:bg-[#9e8e7b]"
                     onClick={(e) => {
                       e.stopPropagation();
                       handlePatientClick(appointment.patientId);
