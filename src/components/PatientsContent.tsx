@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Filter, User, Calendar, FileText } from 'lucide-react';
+import { Search, Filter, Calendar, FileText } from 'lucide-react';
 
 interface PatientsContentProps {
   onPatientSelect?: (patientId: string) => void;
@@ -109,13 +109,9 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
       {/* Header */}
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold" style={{ color: '#61474C' }}>Danh sách bệnh nhân</h1>
+          <h1 className="text-3xl font-bold" style={{ color: '#8a7275' }}>Danh sách bệnh nhân</h1>
           <p className="text-gray-600 mt-2">Quản lý thông tin bệnh nhân đang điều trị</p>
         </div>
-        <Button className="theme-primary-bg hover:bg-[#4a3639]">
-          <User className="mr-2 h-4 w-4" />
-          Thêm bệnh nhân mới
-        </Button>
       </div>
 
       {/* Filters */}
@@ -129,16 +125,16 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
                   placeholder="Tìm kiếm theo tên hoặc mã bệnh nhân..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 border-[#9e8e7b] focus:ring-[#61474C]"
+                  className="pl-10 border-[#c4b8a8] focus:ring-[#8a7275]"
                 />
               </div>
             </div>
 
             <div className="flex items-center space-x-2">
-              <Filter className="h-4 w-4" style={{ color: '#61474C' }} />
-              <span className="text-sm font-medium" style={{ color: '#61474C' }}>Trạng thái:</span>
+              <Filter className="h-4 w-4" style={{ color: '#8a7275' }} />
+              <span className="text-sm font-medium" style={{ color: '#8a7275' }}>Trạng thái:</span>
               <Select value={statusFilter} onValueChange={(value: any) => setStatusFilter(value)}>
-                <SelectTrigger className="w-40 border-[#9e8e7b] focus:ring-[#61474C]">
+                <SelectTrigger className="w-40 border-[#c4b8a8] focus:ring-[#8a7275]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -151,9 +147,9 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
             </div>
 
             <div className="flex items-center space-x-2">
-              <span className="text-sm font-medium" style={{ color: '#61474C' }}>Giai đoạn:</span>
+              <span className="text-sm font-medium" style={{ color: '#8a7275' }}>Giai đoạn:</span>
               <Select value={stageFilter} onValueChange={(value: any) => setStageFilter(value)}>
-                <SelectTrigger className="w-40 border-[#9e8e7b] focus:ring-[#61474C]">
+                <SelectTrigger className="w-40 border-[#c4b8a8] focus:ring-[#8a7275]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -173,15 +169,15 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
         {filteredPatients.map((patient) => (
           <Card 
             key={patient.id} 
-            className="theme-card hover:shadow-lg transition-all cursor-pointer hover:border-[#61474C]"
+            className="theme-card hover:shadow-lg transition-all cursor-pointer hover:border-[#8a7275]"
             onClick={() => handlePatientClick(patient.id)}
           >
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div>
-                  <CardTitle className="text-lg" style={{ color: '#61474C' }}>{patient.name}</CardTitle>
+                  <CardTitle className="text-lg" style={{ color: '#8a7275' }}>{patient.name}</CardTitle>
                   <div className="flex items-center space-x-2 mt-1">
-                    <Badge variant="outline" className="text-xs border-[#9e8e7b] text-[#61474C]">{patient.id}</Badge>
+                    <Badge variant="outline" className="text-xs border-[#c4b8a8] text-[#8a7275]">{patient.id}</Badge>
                     <span className="text-sm text-gray-600">{patient.age} tuổi</span>
                   </div>
                 </div>
@@ -196,7 +192,7 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
               
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Điều trị:</span>
-                <span className="text-sm font-medium" style={{ color: '#61474C' }}>{patient.treatment}</span>
+                <span className="text-sm font-medium" style={{ color: '#8a7275' }}>{patient.treatment}</span>
               </div>
 
               <div className="flex items-center space-x-2">
@@ -206,16 +202,16 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
 
               {patient.nextAppointment && (
                 <div className="flex items-center space-x-2">
-                  <Calendar className="h-4 w-4" style={{ color: '#9e8e7b' }} />
-                  <span className="text-sm" style={{ color: '#61474C' }}>Hẹn tiếp: {patient.nextAppointment}</span>
+                  <Calendar className="h-4 w-4" style={{ color: '#c4b8a8' }} />
+                  <span className="text-sm" style={{ color: '#8a7275' }}>Hẹn tiếp: {patient.nextAppointment}</span>
                 </div>
               )}
 
-              <div className="pt-2 border-t" style={{ borderColor: '#9e8e7b' }}>
+              <div className="pt-2 border-t" style={{ borderColor: '#c4b8a8' }}>
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="w-full border-[#9e8e7b] text-[#61474C] hover:bg-[#9e8e7b]"
+                  className="w-full border-[#c4b8a8] text-[#8a7275] hover:bg-[#c4b8a8]"
                   onClick={(e) => {
                     e.stopPropagation();
                     handlePatientClick(patient.id);

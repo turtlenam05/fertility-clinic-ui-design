@@ -8,7 +8,6 @@ import {
   Users, 
   Clock, 
   TrendingUp, 
-  UserPlus, 
   FileText, 
   TestTube,
   Heart,
@@ -22,19 +21,8 @@ export const DashboardContent: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold" style={{ color: '#61474C' }}>Dashboard</h1>
-          <p className="text-gray-600 mt-2">Chào mừng bác sĩ - Chuyên khoa Hiếm Muộn</p>
+          <h1 className="text-3xl font-bold" style={{ color: '#8a7275' }}>Dashboard</h1>
           <p className="text-sm text-gray-500">Hôm nay: {new Date().toLocaleDateString('vi-VN')}</p>
-        </div>
-        <div className="flex space-x-2">
-          <Button className="theme-primary-bg hover:bg-[#4a3639]">
-            <UserPlus className="mr-2 h-4 w-4" />
-            Thêm bệnh nhân
-          </Button>
-          <Button variant="outline" className="border-[#9e8e7b] text-[#61474C] hover:bg-[#9e8e7b]">
-            <FileText className="mr-2 h-4 w-4" />
-            Tạo hồ sơ mới
-          </Button>
         </div>
       </div>
 
@@ -43,10 +31,10 @@ export const DashboardContent: React.FC = () => {
         <Card className="theme-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-600">Lịch hẹn hôm nay</CardTitle>
-            <Calendar className="h-4 w-4" style={{ color: '#61474C' }} />
+            <Calendar className="h-4 w-4" style={{ color: '#8a7275' }} />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold" style={{ color: '#61474C' }}>12</div>
+            <div className="text-2xl font-bold" style={{ color: '#8a7275' }}>12</div>
             <p className="text-xs text-gray-500 mt-1">
               <span className="text-green-600">+2</span> so với hôm qua
             </p>
@@ -56,10 +44,10 @@ export const DashboardContent: React.FC = () => {
         <Card className="theme-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-600">Bệnh nhân đang điều trị</CardTitle>
-            <Users className="h-4 w-4" style={{ color: '#9e8e7b' }} />
+            <Users className="h-4 w-4" style={{ color: '#c4b8a8' }} />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold" style={{ color: '#61474C' }}>47</div>
+            <div className="text-2xl font-bold" style={{ color: '#8a7275' }}>47</div>
             <p className="text-xs text-gray-500 mt-1">
               <span className="text-blue-600">8</span> ca mới tuần này
             </p>
@@ -96,7 +84,7 @@ export const DashboardContent: React.FC = () => {
         {/* Today's Appointments */}
         <Card className="lg:col-span-2 theme-card">
           <CardHeader>
-            <CardTitle className="flex items-center" style={{ color: '#61474C' }}>
+            <CardTitle className="flex items-center" style={{ color: '#8a7275' }}>
               <Calendar className="mr-2 h-5 w-5" />
               Lịch hẹn hôm nay
             </CardTitle>
@@ -109,9 +97,9 @@ export const DashboardContent: React.FC = () => {
                 { time: '10:15', patient: 'BN003 - Lê Thị C', purpose: 'Tư vấn IUI', status: 'confirmed' },
                 { time: '11:00', patient: 'BN004 - Phạm Thị D', purpose: 'Xem kết quả', status: 'completed' },
               ].map((appointment, index) => (
-                <div key={index} className="flex items-center justify-between p-3 rounded-lg border" style={{ borderColor: '#9e8e7b' }}>
+                <div key={index} className="flex items-center justify-between p-3 rounded-lg border" style={{ borderColor: '#c4b8a8' }}>
                   <div className="flex items-center space-x-3">
-                    <div className="text-sm font-medium" style={{ color: '#61474C' }}>{appointment.time}</div>
+                    <div className="text-sm font-medium" style={{ color: '#8a7275' }}>{appointment.time}</div>
                     <div>
                       <div className="font-medium">{appointment.patient}</div>
                       <div className="text-sm text-gray-500">{appointment.purpose}</div>
@@ -139,18 +127,18 @@ export const DashboardContent: React.FC = () => {
           {/* Quick Actions */}
           <Card className="theme-card">
             <CardHeader>
-              <CardTitle style={{ color: '#61474C' }}>Thao tác nhanh</CardTitle>
+              <CardTitle style={{ color: '#8a7275' }}>Thao tác nhanh</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button variant="outline" className="w-full justify-start border-[#9e8e7b] text-[#61474C] hover:bg-[#9e8e7b]">
+              <Button variant="outline" className="w-full justify-start border-[#c4b8a8] text-[#8a7275] hover:bg-[#c4b8a8]">
                 <TestTube className="mr-2 h-4 w-4" />
                 Xem kết quả xét nghiệm mới
               </Button>
-              <Button variant="outline" className="w-full justify-start border-[#9e8e7b] text-[#61474C] hover:bg-[#9e8e7b]">
+              <Button variant="outline" className="w-full justify-start border-[#c4b8a8] text-[#8a7275] hover:bg-[#c4b8a8]">
                 <FileText className="mr-2 h-4 w-4" />
                 Hồ sơ truy cập gần đây
               </Button>
-              <Button variant="outline" className="w-full justify-start border-[#9e8e7b] text-[#61474C] hover:bg-[#9e8e7b]">
+              <Button variant="outline" className="w-full justify-start border-[#c4b8a8] text-[#8a7275] hover:bg-[#c4b8a8]">
                 <Heart className="mr-2 h-4 w-4" />
                 Theo dõi ca đặc biệt
               </Button>
@@ -160,25 +148,25 @@ export const DashboardContent: React.FC = () => {
           {/* Treatment Stats */}
           <Card className="theme-card">
             <CardHeader>
-              <CardTitle style={{ color: '#61474C' }}>Thống kê điều trị</CardTitle>
+              <CardTitle style={{ color: '#8a7275' }}>Thống kê điều trị</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">IVF tháng này:</span>
-                <span className="font-semibold" style={{ color: '#61474C' }}>18 ca</span>
+                <span className="font-semibold" style={{ color: '#8a7275' }}>18 ca</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">IUI tháng này:</span>
-                <span className="font-semibold" style={{ color: '#61474C' }}>24 ca</span>
+                <span className="font-semibold" style={{ color: '#8a7275' }}>24 ca</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">Hoàn tất điều trị:</span>
                 <span className="font-semibold text-green-600">15 ca</span>
               </div>
-              <div className="pt-2 border-t" style={{ borderColor: '#9e8e7b' }}>
+              <div className="pt-2 border-t" style={{ borderColor: '#c4b8a8' }}>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">Tổng bệnh nhân:</span>
-                  <span className="font-semibold" style={{ color: '#61474C' }}>156</span>
+                  <span className="font-semibold" style={{ color: '#8a7275' }}>156</span>
                 </div>
               </div>
             </CardContent>
@@ -189,7 +177,7 @@ export const DashboardContent: React.FC = () => {
       {/* Recent Activity */}
       <Card className="theme-card">
         <CardHeader>
-          <CardTitle className="flex items-center" style={{ color: '#61474C' }}>
+          <CardTitle className="flex items-center" style={{ color: '#8a7275' }}>
             <Activity className="mr-2 h-5 w-5" />
             Hoạt động gần đây
           </CardTitle>
@@ -202,8 +190,8 @@ export const DashboardContent: React.FC = () => {
               { time: '1 ngày trước', action: 'Hoàn tất điều trị BN003 - IUI thành công' },
               { time: '2 ngày trước', action: 'Xem kết quả xét nghiệm BN007 - Hormone profile' },
             ].map((activity, index) => (
-              <div key={index} className="flex items-start space-x-3 p-2 rounded border-l-4" style={{ borderLeftColor: '#9e8e7b' }}>
-                <Clock className="h-4 w-4 mt-0.5" style={{ color: '#61474C' }} />
+              <div key={index} className="flex items-start space-x-3 p-2 rounded border-l-4" style={{ borderLeftColor: '#c4b8a8' }}>
+                <Clock className="h-4 w-4 mt-0.5" style={{ color: '#8a7275' }} />
                 <div>
                   <div className="text-sm text-gray-500">{activity.time}</div>
                   <div className="text-sm">{activity.action}</div>
