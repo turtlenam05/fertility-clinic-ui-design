@@ -109,7 +109,7 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
       {/* Header */}
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold" style={{ color: '#8a7275' }}>Danh sách bệnh nhân</h1>
+          <h1 className="text-3xl font-bold" style={{ color: '#4D3C2D' }}>Danh sách bệnh nhân</h1>
           <p className="text-gray-600 mt-2">Quản lý thông tin bệnh nhân đang điều trị</p>
         </div>
       </div>
@@ -125,16 +125,16 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
                   placeholder="Tìm kiếm theo tên hoặc mã bệnh nhân..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 border-[#c4b8a8] focus:ring-[#8a7275]"
+                  className="pl-10 border-[#D9CAC2] focus:ring-[#4D3C2D]"
                 />
               </div>
             </div>
 
             <div className="flex items-center space-x-2">
-              <Filter className="h-4 w-4" style={{ color: '#8a7275' }} />
-              <span className="text-sm font-medium" style={{ color: '#8a7275' }}>Trạng thái:</span>
+              <Filter className="h-4 w-4" style={{ color: '#4D3C2D' }} />
+              <span className="text-sm font-medium" style={{ color: '#4D3C2D' }}>Trạng thái:</span>
               <Select value={statusFilter} onValueChange={(value: any) => setStatusFilter(value)}>
-                <SelectTrigger className="w-40 border-[#c4b8a8] focus:ring-[#8a7275]">
+                <SelectTrigger className="w-40 border-[#D9CAC2] focus:ring-[#4D3C2D]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -147,9 +147,9 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
             </div>
 
             <div className="flex items-center space-x-2">
-              <span className="text-sm font-medium" style={{ color: '#8a7275' }}>Giai đoạn:</span>
+              <span className="text-sm font-medium" style={{ color: '#4D3C2D' }}>Giai đoạn:</span>
               <Select value={stageFilter} onValueChange={(value: any) => setStageFilter(value)}>
-                <SelectTrigger className="w-40 border-[#c4b8a8] focus:ring-[#8a7275]">
+                <SelectTrigger className="w-40 border-[#D9CAC2] focus:ring-[#4D3C2D]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -169,15 +169,15 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
         {filteredPatients.map((patient) => (
           <Card 
             key={patient.id} 
-            className="theme-card hover:shadow-lg transition-all cursor-pointer hover:border-[#8a7275]"
+            className="theme-card hover:shadow-lg transition-all cursor-pointer hover:border-[#4D3C2D]"
             onClick={() => handlePatientClick(patient.id)}
           >
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div>
-                  <CardTitle className="text-lg" style={{ color: '#8a7275' }}>{patient.name}</CardTitle>
+                  <CardTitle className="text-lg" style={{ color: '#4D3C2D' }}>{patient.name}</CardTitle>
                   <div className="flex items-center space-x-2 mt-1">
-                    <Badge variant="outline" className="text-xs border-[#c4b8a8] text-[#8a7275]">{patient.id}</Badge>
+                    <Badge variant="outline" className="text-xs border-[#D9CAC2] text-[#4D3C2D]">{patient.id}</Badge>
                     <span className="text-sm text-gray-600">{patient.age} tuổi</span>
                   </div>
                 </div>
@@ -192,7 +192,7 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
               
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Điều trị:</span>
-                <span className="text-sm font-medium" style={{ color: '#8a7275' }}>{patient.treatment}</span>
+                <span className="text-sm font-medium" style={{ color: '#4D3C2D' }}>{patient.treatment}</span>
               </div>
 
               <div className="flex items-center space-x-2">
@@ -202,16 +202,16 @@ export const PatientsContent: React.FC<PatientsContentProps> = ({ onPatientSelec
 
               {patient.nextAppointment && (
                 <div className="flex items-center space-x-2">
-                  <Calendar className="h-4 w-4" style={{ color: '#c4b8a8' }} />
-                  <span className="text-sm" style={{ color: '#8a7275' }}>Hẹn tiếp: {patient.nextAppointment}</span>
+                  <Calendar className="h-4 w-4" style={{ color: '#D9CAC2' }} />
+                  <span className="text-sm" style={{ color: '#4D3C2D' }}>Hẹn tiếp: {patient.nextAppointment}</span>
                 </div>
               )}
 
-              <div className="pt-2 border-t" style={{ borderColor: '#c4b8a8' }}>
+              <div className="pt-2 border-t" style={{ borderColor: '#D9CAC2' }}>
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="w-full border-[#c4b8a8] text-[#8a7275] hover:bg-[#c4b8a8]"
+                  className="w-full border-[#D9CAC2] text-[#4D3C2D] hover:bg-[#D9CAC2]"
                   onClick={(e) => {
                     e.stopPropagation();
                     handlePatientClick(patient.id);

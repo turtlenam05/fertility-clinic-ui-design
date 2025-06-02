@@ -45,14 +45,14 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({ activeTab, onTabCh
 
   return (
     <Sidebar className="w-64 border-r theme-primary-bg">
-      <SidebarHeader className="p-6 border-b border-[#6b5a5d]">
+      <SidebarHeader className="p-6 border-b border-[#3a2a1f]">
         <div className="flex flex-col space-y-2">
           <h2 className="text-lg font-semibold text-white">Bác sĩ Nguyễn Thanh Nam</h2>
-          <p className="text-sm text-[#e6dfdc]">Khoa Hiếm Muộn</p>
+          <p className="text-sm text-[#D9CAC2]">Khoa Hiếm Muộn</p>
         </div>
       </SidebarHeader>
       
-      <SidebarContent className="bg-[#8a7275]">
+      <SidebarContent className="bg-[#4D3C2D]">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -61,10 +61,10 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({ activeTab, onTabCh
                   <SidebarMenuButton 
                     onClick={() => onTabChange(item.key)}
                     isActive={activeTab === item.key}
-                    className={`w-full justify-start text-white hover:bg-[#6b5a5d] transition-colors ${
+                    className={`w-full justify-start text-white hover:bg-[#3a2a1f] transition-colors ${
                       activeTab === item.key 
-                        ? 'bg-[#c4b8a8] text-[#8a7275] hover:bg-[#b8aa96]' 
-                        : 'hover:text-[#e6dfdc]'
+                        ? 'bg-[#D9CAC2] text-[#4D3C2D] hover:bg-[#c9b8aa]' 
+                        : 'hover:text-[#EAE4E1]'
                     }`}
                   >
                     <item.icon className="mr-2 h-4 w-4" />
@@ -77,10 +77,10 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({ activeTab, onTabCh
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4 bg-[#8a7275] border-t border-[#6b5a5d]">
+      <SidebarFooter className="p-4 bg-[#4D3C2D] border-t border-[#3a2a1f]">
         <Button 
           variant="ghost" 
-          className="w-full justify-start text-[#e6dfdc] hover:text-white hover:bg-[#6b5a5d]"
+          className="w-full justify-start text-[#EAE4E1] hover:text-white hover:bg-[#3a2a1f]"
           onClick={handleLogout}
         >
           <LogOut className="mr-2 h-4 w-4" />

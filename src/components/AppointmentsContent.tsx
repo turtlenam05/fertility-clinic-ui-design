@@ -87,7 +87,7 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
       {/* Header */}
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold" style={{ color: '#8a7275' }}>Lịch hẹn</h1>
+          <h1 className="text-3xl font-bold" style={{ color: '#4D3C2D' }}>Lịch hẹn</h1>
           <p className="text-gray-600 mt-2">Quản lý lịch hẹn và cuộc hẹn</p>
         </div>
       </div>
@@ -97,10 +97,10 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
         <CardContent className="pt-6">
           <div className="flex flex-wrap gap-4 items-center">
             <div className="flex items-center space-x-2">
-              <Filter className="h-4 w-4" style={{ color: '#8a7275' }} />
-              <span className="text-sm font-medium" style={{ color: '#8a7275' }}>Xem theo:</span>
+              <Filter className="h-4 w-4" style={{ color: '#4D3C2D' }} />
+              <span className="text-sm font-medium" style={{ color: '#4D3C2D' }}>Xem theo:</span>
               <Select value={viewType} onValueChange={(value: any) => setViewType(value)}>
-                <SelectTrigger className="w-32 border-[#c4b8a8] focus:ring-[#8a7275]">
+                <SelectTrigger className="w-32 border-[#D9CAC2] focus:ring-[#4D3C2D]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -112,9 +112,9 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
             </div>
 
             <div className="flex items-center space-x-2">
-              <span className="text-sm font-medium" style={{ color: '#8a7275' }}>Trạng thái:</span>
+              <span className="text-sm font-medium" style={{ color: '#4D3C2D' }}>Trạng thái:</span>
               <Select value={statusFilter} onValueChange={(value: any) => setStatusFilter(value)}>
-                <SelectTrigger className="w-40 border-[#c4b8a8] focus:ring-[#8a7275]">
+                <SelectTrigger className="w-40 border-[#D9CAC2] focus:ring-[#4D3C2D]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -129,7 +129,7 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
             <Button 
               variant="outline" 
               onClick={() => setSelectedDate(new Date().toISOString().split('T')[0])}
-              className="border-[#c4b8a8] text-[#8a7275] hover:bg-[#c4b8a8]"
+              className="border-[#D9CAC2] text-[#4D3C2D] hover:bg-[#D9CAC2]"
             >
               Hôm nay
             </Button>
@@ -140,7 +140,7 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
       {/* Calendar View */}
       <Card className="theme-card">
         <CardHeader>
-          <CardTitle style={{ color: '#8a7275' }}>
+          <CardTitle style={{ color: '#4D3C2D' }}>
             Lịch hẹn - {viewType === 'day' ? 'Hôm nay' : viewType === 'week' ? 'Tuần này' : 'Tháng này'}
           </CardTitle>
         </CardHeader>
@@ -154,13 +154,13 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
               >
                 <div className="flex items-center space-x-4">
                   <div className="text-center">
-                    <div className="text-lg font-semibold" style={{ color: '#8a7275' }}>{appointment.time}</div>
+                    <div className="text-lg font-semibold" style={{ color: '#4D3C2D' }}>{appointment.time}</div>
                     <div className="text-xs text-gray-500">{appointment.date}</div>
                   </div>
-                  <div className="border-l pl-4" style={{ borderColor: '#c4b8a8' }}>
+                  <div className="border-l pl-4" style={{ borderColor: '#D9CAC2' }}>
                     <div className="font-medium">{appointment.patientName}</div>
                     <div className="text-sm text-gray-600">{appointment.patientId}</div>
-                    <div className="text-sm" style={{ color: '#8a7275' }}>{appointment.purpose}</div>
+                    <div className="text-sm" style={{ color: '#4D3C2D' }}>{appointment.purpose}</div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -168,7 +168,7 @@ export const AppointmentsContent: React.FC<AppointmentsContentProps> = ({ onPati
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="border-[#c4b8a8] text-[#8a7275] hover:bg-[#c4b8a8]"
+                    className="border-[#D9CAC2] text-[#4D3C2D] hover:bg-[#D9CAC2]"
                     onClick={(e) => {
                       e.stopPropagation();
                       handlePatientClick(appointment.patientId);
