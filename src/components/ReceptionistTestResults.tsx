@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Eye, Send } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { Eye, Send, Filter } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 import TestResultModal from './TestResultModal';
 
 interface TestItem {
@@ -140,6 +142,8 @@ const mockPatients: Patient[] = [
 
 const ReceptionistTestResults: React.FC = () => {
   const [selectedTest, setSelectedTest] = useState<{ testId: string; testName: string; patientName: string } | null>(null);
+  const [showOnlyReady, setShowOnlyReady] = useState(false);
+  const { toast } = useToast();
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -160,9 +164,14 @@ const ReceptionistTestResults: React.FC = () => {
     }
   };
 
-  const handleSendResults = (patientId: string) => {
+  const handleSendResults = (patientId: string, doctorName: string) => {
     console.log(`Sending results for patient: ${patientId}`);
-    // Handle sending results to doctor
+    
+    toast({
+      title: "Gửi kết quả thành công",
+      description: `Kết quả đã được chuyển tới bác sĩ ${doctorName}`,
+      duration: 3000,
+    });
   };
 
   const getStatusMessage = (status: string) => {
@@ -173,15 +182,42 @@ const ReceptionistTestResults: React.FC = () => {
     }
   };
 
+  // Filter patients based on the toggle
+  const filteredPatients = showOnlyReady 
+    ? mockPatients.filter(patient => canSendResults(patient.tests))
+    : mockPatients;
+
   return (
     <div className="p-6 bg-[#EAE4E1] min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl font-bold text-[#4D3C2D] mb-6">
-          Quản lý kết quả xét nghiệm
-        </h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-bold text-[#4D3C2D]">
+            Quản lý kết quả xét nghiệm
+          </h1>
+          
+          <div className="flex items-center space-x-3">
+            <Filter className="w-5 h-5 text-[#4D3C2D]" />
+            <span className="text-sm font-medium text-[#4D3C2D]">
+              Chỉ hiển thị kết quả sẵn sàng gửi
+            </span>
+            <Switch
+              checked={showOnlyReady}
+              onCheckedChange={setShowOnlyReady}
+              className="data-[state=checked]:bg-[#4D3C2D]"
+            />
+          </div>
+        </div>
+        
+        {filteredPatients.length === 0 && showOnlyReady && (
+          <div className="text-center py-8">
+            <p className="text-[#4D3C2D] text-lg">
+              Hiện tại không có bệnh nhân nào sẵn sàng để gửi kết quả
+            </p>
+          </div>
+        )}
         
         <div className="space-y-6">
-          {mockPatients.map((patient) => (
+          {filteredPatients.map((patient) => (
             <Card key={patient.id} className="p-6 bg-white border border-[#D9CAC2] shadow-md">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Patient Info */}
@@ -245,7 +281,7 @@ const ReceptionistTestResults: React.FC = () => {
 
                   <div className="mt-4 pt-4 border-t border-[#D9CAC2] flex justify-end">
                     <Button
-                      onClick={() => handleSendResults(patient.id)}
+                      onClick={() => handleSendResults(patient.id, patient.doctorName)}
                       disabled={!canSendResults(patient.tests)}
                       className={`${
                         canSendResults(patient.tests)
