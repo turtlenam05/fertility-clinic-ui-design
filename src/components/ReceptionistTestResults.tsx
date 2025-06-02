@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { eye, send } from 'lucide-react';
+import { Eye, Send } from 'lucide-react';
 import TestResultModal from './TestResultModal';
 
 interface TestItem {
@@ -181,7 +181,7 @@ const ReceptionistTestResults: React.FC = () => {
                             className="border-[#D9CAC2] text-[#4D3C2D] hover:bg-[#D9CAC2] text-xs px-3 py-1 h-7"
                             disabled={test.status !== 'Trả kết quả'}
                           >
-                            <eye className="w-3 h-3 mr-1" />
+                            <Eye className="w-3 h-3 mr-1" />
                             Xem kết quả
                           </Button>
                         </div>
@@ -199,7 +199,7 @@ const ReceptionistTestResults: React.FC = () => {
                           : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                       }`}
                     >
-                      <send className="w-4 h-4 mr-2" />
+                      <Send className="w-4 h-4 mr-2" />
                       Gửi kết quả
                     </Button>
                   </div>
