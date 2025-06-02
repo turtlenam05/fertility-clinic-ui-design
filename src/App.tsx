@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Index from "./pages/Index";
 import DoctorDashboard from "./pages/DoctorDashboard";
+import ReceptionistDashboard from "./pages/ReceptionistDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -15,6 +16,9 @@ const App = () => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'appointments' | 'patients'>('dashboard');
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
   const [showPatientRecord, setShowPatientRecord] = useState(false);
+  
+  // Receptionist state
+  const [receptionistActiveTab, setReceptionistActiveTab] = useState<'dashboard' | 'appointments' | 'patients' | 'test-results'>('dashboard');
 
   const handlePatientSelect = (patientId: string) => {
     setSelectedPatientId(patientId);
@@ -46,6 +50,15 @@ const App = () => {
                     onPatientSelect={handlePatientSelect}
                   />
                 )
+              } 
+            />
+            <Route 
+              path="/receptionist" 
+              element={
+                <ReceptionistDashboard 
+                  activeTab={receptionistActiveTab}
+                  onTabChange={setReceptionistActiveTab}
+                />
               } 
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
