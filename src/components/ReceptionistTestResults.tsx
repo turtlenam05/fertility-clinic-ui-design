@@ -81,6 +81,60 @@ const mockPatients: Patient[] = [
       { id: 't12', name: 'Xét nghiệm nội tiết LH', status: 'Trả kết quả' },
       { id: 't13', name: 'Xét nghiệm miễn dịch', status: 'Lấy mẫu' }
     ]
+  },
+  {
+    id: '4',
+    name: 'Phạm Thị Lan',
+    patientId: 'BN004',
+    gender: 'Nữ',
+    birthYear: '1988',
+    city: 'Cần Thơ',
+    email: 'lan.pham@email.com',
+    phone: '0913456789',
+    doctorName: 'BS. Lê Minh Tuấn',
+    doctorId: 'BS002',
+    tests: [
+      { id: 't14', name: 'Xét nghiệm máu toàn bộ (CBC)', status: 'Trả kết quả' },
+      { id: 't15', name: 'Đánh giá dự trữ buồng trứng (AMH)', status: 'Trả kết quả' },
+      { id: 't16', name: 'Xét nghiệm nội tiết Prolactin', status: 'Trả kết quả' },
+      { id: 't17', name: 'Xét nghiệm nội tiết Estrogen', status: 'Trả kết quả' }
+    ]
+  },
+  {
+    id: '5',
+    name: 'Hoàng Văn Đức',
+    patientId: 'BN005',
+    gender: 'Nam',
+    birthYear: '1975',
+    city: 'Hải Phòng',
+    email: 'duc.hoang@email.com',
+    phone: '0908765432',
+    doctorName: 'BS. Lê Minh Tuấn',
+    doctorId: 'BS002',
+    tests: [
+      { id: 't18', name: 'Xét nghiệm tinh dịch đồ', status: 'Trả kết quả' },
+      { id: 't19', name: 'Xét nghiệm nội tiết FSH', status: 'Trả kết quả' },
+      { id: 't20', name: 'Xét nghiệm VDRL', status: 'Trả kết quả' }
+    ]
+  },
+  {
+    id: '6',
+    name: 'Vũ Thị Ngọc',
+    patientId: 'BN006',
+    gender: 'Nữ',
+    birthYear: '1992',
+    city: 'Nha Trang',
+    email: 'ngoc.vu@email.com',
+    phone: '0917654321',
+    doctorName: 'BS. Trần Văn Hùng',
+    doctorId: 'BS003',
+    tests: [
+      { id: 't21', name: 'Xét nghiệm tuyến giáp (TSH, T3, FT4)', status: 'Trả kết quả' },
+      { id: 't22', name: 'Xét nghiệm tỉ lệ hồng cầu lắng (ESR)', status: 'Trả kết quả' },
+      { id: 't23', name: 'Xét nghiệm nội tiết LH', status: 'Trả kết quả' },
+      { id: 't24', name: 'Xét nghiệm Chlamydia', status: 'Trả kết quả' },
+      { id: 't25', name: 'Xét nghiệm miễn dịch', status: 'Trả kết quả' }
+    ]
   }
 ];
 
