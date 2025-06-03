@@ -12,7 +12,8 @@ import {
   SidebarGroupContent
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { BarChart3, Calendar, Users, LogOut } from 'lucide-react';
+import { BarChart3, Calendar, Users, LogOut, Home } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface DoctorSidebarProps {
   activeTab: 'dashboard' | 'appointments' | 'patients';
@@ -38,9 +39,10 @@ const menuItems = [
 ];
 
 export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({ activeTab, onTabChange }) => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
-    // Handle logout logic here
-    console.log('Logging out...');
+    navigate('/');
   };
 
   return (
@@ -77,7 +79,15 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({ activeTab, onTabCh
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4 bg-[#4D3C2D] border-t border-[#3a2a1f]">
+      <SidebarFooter className="p-4 bg-[#4D3C2D] border-t border-[#3a2a1f] space-y-2">
+        <Button 
+          variant="ghost" 
+          className="w-full justify-start text-[#EAE4E1] hover:text-white hover:bg-[#3a2a1f]"
+          onClick={() => navigate('/')}
+        >
+          <Home className="mr-2 h-4 w-4" />
+          Trang chủ
+        </Button>
         <Button 
           variant="ghost" 
           className="w-full justify-start text-[#EAE4E1] hover:text-white hover:bg-[#3a2a1f]"
