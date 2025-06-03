@@ -8,6 +8,7 @@ import { useState } from "react";
 import Index from "./pages/Index";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import ReceptionistDashboard from "./pages/ReceptionistDashboard";
+import PatientDashboard from "./pages/PatientDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -60,6 +61,10 @@ const App = () => {
                   onTabChange={setReceptionistActiveTab}
                 />
               } 
+            />
+            <Route 
+              path="/patient" 
+              element={<PatientDashboard />} 
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
