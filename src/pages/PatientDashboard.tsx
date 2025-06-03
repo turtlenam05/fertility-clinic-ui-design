@@ -1,8 +1,8 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { FileText, Calendar, User, Phone, Mail, MapPin, Home } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { FileText, Calendar, User, Phone, Mail, MapPin } from 'lucide-react';
 import PatientRecord from '@/components/PatientRecord';
 
 interface PatientDashboardProps {
@@ -14,8 +14,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({
   activeView = 'dashboard',
   onViewChange
 }) => {
-  const [currentView, setCurrentView] = useState<'dashboard' | 'medical-record'>(activeView);
-  const navigate = useNavigate();
+  const [currentView, setCurrentView] = useState(activeView);
 
   const handleViewChange = (view: 'dashboard' | 'medical-record') => {
     setCurrentView(view);
@@ -39,15 +38,6 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({
             </div>
             
             <div className="flex items-center space-x-4">
-              <Button
-                variant="outline"
-                onClick={() => navigate('/')}
-                className="border-[#D9CAC2] text-[#4D3C2D] hover:bg-[#D9CAC2]"
-              >
-                <Home className="w-4 h-4 mr-2" />
-                Trang chủ
-              </Button>
-              
               <Button
                 variant={currentView === 'dashboard' ? 'default' : 'outline'}
                 onClick={() => handleViewChange('dashboard')}
