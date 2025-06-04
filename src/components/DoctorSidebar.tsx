@@ -12,7 +12,8 @@ import {
   SidebarGroupContent
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { BarChart3, Calendar, Users, LogOut } from 'lucide-react';
+import { BarChart3, Calendar, Users, LogOut, Home } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface DoctorSidebarProps {
   activeTab: 'dashboard' | 'appointments' | 'patients';
@@ -56,6 +57,16 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({ activeTab, onTabCh
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
+              <SidebarMenuItem>
+                <Link to="/">
+                  <SidebarMenuButton
+                    className="w-full justify-start text-white hover:bg-[#3a2a1f] transition-colors"
+                  >
+                    <Home className="mr-2 h-4 w-4" />
+                    <span>Trang chủ</span>
+                  </SidebarMenuButton>
+                </Link>
+              </SidebarMenuItem>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.key}>
                   <SidebarMenuButton 

@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { FileText, Calendar, User, Phone, Mail, MapPin } from 'lucide-react';
+import { FileText, Calendar, User, Phone, Mail, MapPin, Home } from 'lucide-react';
 import PatientRecord from '@/components/PatientRecord';
+import { Link } from 'react-router-dom';
 
 type ViewType = 'dashboard' | 'medical-record';
 
@@ -39,6 +41,16 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({
             </div>
             
             <div className="flex items-center space-x-4">
+              <Link to="/">
+                <Button
+                  variant="outline"
+                  className="border-[#D9CAC2] text-[#4D3C2D] hover:bg-[#D9CAC2]"
+                >
+                  <Home className="w-4 h-4 mr-2" />
+                  Trang chủ
+                </Button>
+              </Link>
+              
               <Button
                 variant={currentView === 'dashboard' ? 'default' : 'outline'}
                 onClick={() => handleViewChange('dashboard')}
