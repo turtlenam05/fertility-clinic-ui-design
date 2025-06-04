@@ -1,22 +1,23 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { FileText, Calendar, User, Phone, Mail, MapPin } from 'lucide-react';
 import PatientRecord from '@/components/PatientRecord';
 
+type ViewType = 'dashboard' | 'medical-record';
+
 interface PatientDashboardProps {
-  activeView?: 'dashboard' | 'medical-record';
-  onViewChange?: (view: 'dashboard' | 'medical-record') => void;
+  activeView?: ViewType;
+  onViewChange?: (view: ViewType) => void;
 }
 
 const PatientDashboard: React.FC<PatientDashboardProps> = ({
   activeView = 'dashboard',
   onViewChange
 }) => {
-  const [currentView, setCurrentView] = useState(activeView);
+  const [currentView, setCurrentView] = useState<ViewType>(activeView);
 
-  const handleViewChange = (view: 'dashboard' | 'medical-record') => {
+  const handleViewChange = (view: ViewType) => {
     setCurrentView(view);
     onViewChange?.(view);
   };
