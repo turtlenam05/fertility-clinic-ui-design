@@ -10,7 +10,9 @@ import {
   FileText, 
   TestTube,
   Heart,
-  Activity
+  Activity,
+  AlertCircle,
+  CheckCircle
 } from 'lucide-react';
 
 export const DashboardContent: React.FC = () => {
@@ -24,7 +26,7 @@ export const DashboardContent: React.FC = () => {
         </div>
       </div>
 
-      {/* Quick Stats - Hàng 1 (bỏ mục "Cần theo dõi") */}
+      {/* Quick Stats - Hàng 1 */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="theme-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -117,51 +119,42 @@ export const DashboardContent: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Today's Appointments - Giữ nguyên */}
+      {/* Thông báo quan trọng - Thay thế "Lịch hẹn hôm nay" */}
       <Card className="theme-card">
         <CardHeader>
           <CardTitle className="flex items-center" style={{ color: '#4D3C2D' }}>
-            <Calendar className="mr-2 h-5 w-5" />
-            Lịch hẹn hôm nay
+            <AlertCircle className="mr-2 h-5 w-5" />
+            Thông báo quan trọng
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {[
-              { time: '08:00', patient: 'BN001 - Nguyễn Thị A', purpose: 'Tái khám IVF', status: 'confirmed' },
-              { time: '09:30', patient: 'BN002 - Trần Văn B', purpose: 'Siêu âm theo dõi', status: 'waiting' },
-              { time: '10:15', patient: 'BN003 - Lê Thị C', purpose: 'Tư vấn IUI', status: 'confirmed' },
-              { time: '11:00', patient: 'BN004 - Phạm Thị D', purpose: 'Xem kết quả', status: 'completed' },
-            ].map((appointment, index) => (
+              { type: 'urgent', title: 'Kết quả xét nghiệm cần xem ngay', patient: 'BN001 - Nguyễn Thị A', time: '2 phút trước' },
+              { type: 'success', title: 'Phác đồ IVF hoàn thành thành công', patient: 'BN005 - Hoàng Thị E', time: '15 phút trước' },
+              { type: 'warning', title: 'Cần theo dõi đặc biệt', patient: 'BN003 - Lê Thị C', time: '30 phút trước' },
+              { type: 'info', title: 'Cập nhật hồ sơ y tế', patient: 'BN007 - Phạm Văn G', time: '1 giờ trước' },
+            ].map((notification, index) => (
               <div key={index} className="flex items-center justify-between p-3 rounded-lg border" style={{ borderColor: '#D9CAC2' }}>
                 <div className="flex items-center space-x-3">
-                  <div className="text-sm font-medium" style={{ color: '#4D3C2D' }}>{appointment.time}</div>
+                  <div className="flex-shrink-0">
+                    {notification.type === 'urgent' && <AlertCircle className="h-5 w-5 text-red-500" />}
+                    {notification.type === 'success' && <CheckCircle className="h-5 w-5 text-green-500" />}
+                    {notification.type === 'warning' && <AlertCircle className="h-5 w-5 text-yellow-500" />}
+                    {notification.type === 'info' && <FileText className="h-5 w-5" style={{ color: '#4D3C2D' }} />}
+                  </div>
                   <div>
-                    <div className="font-medium">{appointment.patient}</div>
-                    <div className="text-sm text-gray-500">{appointment.purpose}</div>
+                    <div className="font-medium" style={{ color: '#4D3C2D' }}>{notification.title}</div>
+                    <div className="text-sm text-gray-500">{notification.patient}</div>
                   </div>
                 </div>
-                <Badge 
-                  variant={appointment.status === 'completed' ? 'default' : 'secondary'}
-                  className={
-                    appointment.status === 'confirmed' ? 'bg-green-100 text-green-800' :
-                    appointment.status === 'waiting' ? 'theme-accent-bg' :
-                    'bg-gray-100 text-gray-800'
-                  }
-                >
-                  {appointment.status === 'confirmed' ? 'Đã xác nhận' :
-                   appointment.status === 'waiting' ? 'Chờ khám' : 'Hoàn tất'}
-                </Badge>
+                <div className="text-xs text-gray-500">{notification.time}</div>
               </div>
             ))}
             <div className="mt-4 flex justify-between">
               <Button variant="outline" className="border-[#D9CAC2] text-[#4D3C2D] hover:bg-[#D9CAC2]">
                 <TestTube className="mr-2 h-4 w-4" />
-                Xem kết quả xét nghiệm mới
-              </Button>
-              <Button variant="outline" className="border-[#D9CAC2] text-[#4D3C2D] hover:bg-[#D9CAC2]">
-                <FileText className="mr-2 h-4 w-4" />
-                Hồ sơ truy cập gần đây
+                Xem tất cả thông báo
               </Button>
               <Button variant="outline" className="border-[#D9CAC2] text-[#4D3C2D] hover:bg-[#D9CAC2]">
                 <Heart className="mr-2 h-4 w-4" />

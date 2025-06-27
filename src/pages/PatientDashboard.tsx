@@ -16,7 +16,7 @@ const PatientDashboard: React.FC = () => {
   };
 
   if (currentView === 'medical-record') {
-    return <PatientRecord onBackToDashboard={() => handleViewChange('dashboard')} />;
+    return <PatientRecord />;
   }
 
   return (
