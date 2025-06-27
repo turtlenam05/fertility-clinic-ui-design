@@ -17,8 +17,7 @@ import {
   Info,
   Bell
 } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, Area, AreaChart } from 'recharts';
 
 const treatmentData = [
   {
@@ -30,22 +29,28 @@ const treatmentData = [
     name: 'IUI',
     successRate: 45,
     activeCases: 18,
+  },
+  {
+    name: 'ICSI',
+    successRate: 72,
+    activeCases: 15,
   }
 ];
 
 const pieData = [
   { name: 'IVF', value: 23, fill: '#4D3C2D' },
   { name: 'IUI', value: 18, fill: '#D9CAC2' },
+  { name: 'ICSI', value: 15, fill: '#8B7355' },
 ];
 
-const chartConfig = {
-  successRate: {
-    label: "Tỷ lệ thành công (%)",
-  },
-  activeCases: {
-    label: "Số ca đang điều trị",
-  },
-};
+const monthlyData = [
+  { month: 'T1', patients: 12, success: 8 },
+  { month: 'T2', patients: 15, success: 11 },
+  { month: 'T3', patients: 18, success: 13 },
+  { month: 'T4', patients: 22, success: 16 },
+  { month: 'T5', patients: 25, success: 19 },
+  { month: 'T6', patients: 28, success: 21 },
+];
 
 export const DashboardContent: React.FC = () => {
   return (
@@ -62,19 +67,19 @@ export const DashboardContent: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="theme-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">Thông báo quan trọng</CardTitle>
-            <Bell className="h-4 w-4" style={{ color: '#4D3C2D' }} />
+            <CardTitle className="text-sm font-medium text-gray-600">Hoạt động gần đây</CardTitle>
+            <Activity className="h-4 w-4" style={{ color: '#4D3C2D' }} />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold" style={{ color: '#4D3C2D' }}>4</div>
+            <div className="text-2xl font-bold" style={{ color: '#4D3C2D' }}>12</div>
             <div className="flex items-center space-x-1 mt-2">
-              <Badge variant="destructive" className="text-xs">
-                <AlertTriangle className="h-3 w-3 mr-1" />
-                2 Khẩn cấp
+              <Badge variant="default" className="text-xs bg-green-100 text-green-800">
+                <CheckCircle className="h-3 w-3 mr-1" />
+                8 Hoàn thành
               </Badge>
               <Badge variant="secondary" className="text-xs">
-                <Info className="h-3 w-3 mr-1" />
-                2 Thông tin
+                <Clock className="h-3 w-3 mr-1" />
+                4 Đang xử lý
               </Badge>
             </div>
           </CardContent>
@@ -86,9 +91,9 @@ export const DashboardContent: React.FC = () => {
             <Users className="h-4 w-4" style={{ color: '#D9CAC2' }} />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold" style={{ color: '#4D3C2D' }}>47</div>
+            <div className="text-2xl font-bold" style={{ color: '#4D3C2D' }}>56</div>
             <p className="text-xs text-gray-500 mt-1">
-              <span className="text-blue-600">8</span> ca mới tuần này
+              <span className="text-blue-600">12</span> ca mới tuần này
             </p>
           </CardContent>
         </Card>
@@ -99,15 +104,15 @@ export const DashboardContent: React.FC = () => {
             <TrendingUp className="h-4 w-4 text-green-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">73%</div>
+            <div className="text-2xl font-bold text-green-600">75%</div>
             <p className="text-xs text-gray-500 mt-1">
-              <span className="text-green-600">+5%</span> so với tháng trước
+              <span className="text-green-600">+7%</span> so với tháng trước
             </p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Thống kê chuyên sâu với biểu đồ - Hàng 2 */}
+      {/* Thống kê với biểu đồ - Hàng 2 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="theme-card">
           <CardHeader>
@@ -117,7 +122,7 @@ export const DashboardContent: React.FC = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="h-[300px]">
+            <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={treatmentData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#D9CAC2" opacity={0.3} />
@@ -133,19 +138,23 @@ export const DashboardContent: React.FC = () => {
                     tick={{ fill: '#4D3C2D', fontSize: 12 }}
                     label={{ value: 'Tỷ lệ (%)', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: '#4D3C2D' } }}
                   />
-                  <ChartTooltip 
-                    content={<ChartTooltipContent />}
-                    cursor={{ fill: '#D9CAC2', opacity: 0.1 }}
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'white', 
+                      border: '1px solid #D9CAC2',
+                      borderRadius: '8px',
+                      color: '#4D3C2D'
+                    }}
                   />
                   <Bar 
                     dataKey="successRate" 
                     fill="#4D3C2D" 
                     radius={[4, 4, 0, 0]}
-                    name="Tỷ lệ thành công"
+                    name="Tỷ lệ thành công (%)"
                   />
                 </BarChart>
               </ResponsiveContainer>
-            </ChartContainer>
+            </div>
           </CardContent>
         </Card>
 
@@ -157,7 +166,7 @@ export const DashboardContent: React.FC = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="h-[300px]">
+            <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -175,12 +184,17 @@ export const DashboardContent: React.FC = () => {
                       <Cell key={`cell-${index}`} fill={entry.fill} />
                     ))}
                   </Pie>
-                  <ChartTooltip 
-                    content={<ChartTooltipContent />}
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'white', 
+                      border: '1px solid #D9CAC2',
+                      borderRadius: '8px',
+                      color: '#4D3C2D'
+                    }}
                   />
                 </PieChart>
               </ResponsiveContainer>
-            </ChartContainer>
+            </div>
             
             <div className="mt-4 space-y-2">
               <div className="flex justify-between items-center">
@@ -188,21 +202,129 @@ export const DashboardContent: React.FC = () => {
                   <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: '#4D3C2D' }}></div>
                   <span className="text-sm">IVF</span>
                 </div>
-                <span className="text-sm font-medium">23 ca (68%)</span>
+                <span className="text-sm font-medium">23 ca</span>
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
                   <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: '#D9CAC2' }}></div>
                   <span className="text-sm">IUI</span>
                 </div>
-                <span className="text-sm font-medium">18 ca (45%)</span>
+                <span className="text-sm font-medium">18 ca</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: '#8B7355' }}></div>
+                  <span className="text-sm">ICSI</span>
+                </div>
+                <span className="text-sm font-medium">15 ca</span>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Hoạt động gần đây - Hàng 3 */}
+      {/* Biểu đồ xu hướng - Hàng 3 */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card className="theme-card">
+          <CardHeader>
+            <CardTitle className="flex items-center" style={{ color: '#4D3C2D' }}>
+              <TrendingUp className="mr-2 h-5 w-5" />
+              Xu hướng bệnh nhân theo tháng
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#D9CAC2" opacity={0.3} />
+                  <XAxis 
+                    dataKey="month" 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: '#4D3C2D', fontSize: 12 }}
+                  />
+                  <YAxis 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: '#4D3C2D', fontSize: 12 }}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'white', 
+                      border: '1px solid #D9CAC2',
+                      borderRadius: '8px',
+                      color: '#4D3C2D'
+                    }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="patients" 
+                    stroke="#4D3C2D" 
+                    strokeWidth={3}
+                    dot={{ fill: '#4D3C2D', strokeWidth: 2, r: 4 }}
+                    name="Số bệnh nhân"
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="success" 
+                    stroke="#D9CAC2" 
+                    strokeWidth={3}
+                    dot={{ fill: '#D9CAC2', strokeWidth: 2, r: 4 }}
+                    name="Thành công"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="theme-card">
+          <CardHeader>
+            <CardTitle className="flex items-center" style={{ color: '#4D3C2D' }}>
+              <Activity className="mr-2 h-5 w-5" />
+              Hiệu suất điều trị
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#D9CAC2" opacity={0.3} />
+                  <XAxis 
+                    dataKey="month" 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: '#4D3C2D', fontSize: 12 }}
+                  />
+                  <YAxis 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: '#4D3C2D', fontSize: 12 }}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'white', 
+                      border: '1px solid #D9CAC2',
+                      borderRadius: '8px',
+                      color: '#4D3C2D'
+                    }}
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="success" 
+                    stroke="#4D3C2D" 
+                    fill="#4D3C2D"
+                    fillOpacity={0.6}
+                    name="Ca thành công"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Hoạt động gần đây - Hàng 4 */}
       <Card className="theme-card">
         <CardHeader>
           <CardTitle className="flex items-center" style={{ color: '#4D3C2D' }}>
@@ -250,7 +372,7 @@ export const DashboardContent: React.FC = () => {
             </div>
           </div>
         </CardContent>
-      </div>
+      </Card>
     </div>
   );
 };
