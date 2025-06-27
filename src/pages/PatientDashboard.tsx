@@ -53,7 +53,7 @@ const PatientDashboard: React.FC = () => {
               </Button>
               
               <Button
-                variant={currentView === 'medical-record' ? 'default' : 'outline'}
+                variant="outline"
                 onClick={() => handleViewChange('medical-record')}
                 className="border-[#D9CAC2] text-[#4D3C2D] hover:bg-[#D9CAC2]"
               >
